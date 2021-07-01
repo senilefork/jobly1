@@ -65,10 +65,10 @@ router.get("/", async function (req, res, next) {
  * Authorization required: none
  */
 
-router.get("/:handle", async function (req, res, next) {
+router.get("/:title", async function (req, res, next) {
   try {
-    const company = await Company.get(req.params.handle);
-    return res.json({ company });
+    const job = await Job.get(req.params.title);
+    return res.json({ job });
   } catch (err) {
     return next(err);
   }
@@ -85,16 +85,17 @@ router.get("/:handle", async function (req, res, next) {
  * Authorization required: login
  */
 
-router.patch("/:handle", ensureAdmin, async function (req, res, next) {
+router.patch("/:title", ensureAdmin, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, companyUpdateSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
+    // const validator = jsonschema.validate(req.body, companyUpdateSchema);
+    // if (!validator.valid) {
+    //   const errs = validator.errors.map(e => e.stack);
+    //   throw new BadRequestError(errs);
+    const job = await Job.update(req.params.title, req.body);
+    return res.json({ job });
+    //}
 
-    const company = await Company.update(req.params.handle, req.body);
-    return res.json({ company });
+ 
   } catch (err) {
     return next(err);
   }
@@ -105,10 +106,10 @@ router.patch("/:handle", ensureAdmin, async function (req, res, next) {
  * Authorization: login
  */
 
-router.delete("/:handle", ensureAdmin, async function (req, res, next) {
+router.delete("/:title", ensureAdmin, async function (req, res, next) {
   try {
-    await Company.remove(req.params.handle);
-    return res.json({ deleted: req.params.handle });
+    await Job.remove(req.params.title);
+    return res.json({ deleted: req.params.title });
   } catch (err) {
     return next(err);
   }
