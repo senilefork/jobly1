@@ -64,3 +64,7 @@ router.post("/register", async function (req, res, next) {
 
 
 module.exports = router;
+
+//erica "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVyaWNhIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYyNTE4NzE4MH0.Kd9WzCpDSi7M0IW_tl0DoEUk6uBkhZdKk20rI6--zSg"
+
+//anna "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFubmEiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2MjUxODA5Nzl9.fdDcvve9WoaxMb9UgscjhphKlK_eQ4jiHOHhgfzkfp4"

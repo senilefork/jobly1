@@ -60,11 +60,28 @@ function ensureAdmin(req, res, next){
   } catch(e) {
     return next(e)
   }
+
+//Ensure that current user is either an admin or corresponding user for specific route
+}
+
+function ensureUserOrAdmin(req, res, next){
+  try{
+    let user = res.locals.user
+    if(user){
+      if(!(user.isAdmin || user.username === req.params.username)){
+        throw new UnauthorizedError();
+      }
+    }
+    return next();
+  } catch(e) {
+    return next(e)
+  }
 }
 
 
 module.exports = {
   authenticateJWT,
   ensureLoggedIn,
-  ensureAdmin
+  ensureAdmin,
+  ensureUserOrAdmin
 };
